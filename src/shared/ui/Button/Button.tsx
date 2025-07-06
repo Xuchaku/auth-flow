@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, forwardRef } from 'react';
 
 type ButtonCustomProps = ButtonHTMLAttributes<HTMLButtonElement> & {
    loading?: boolean;
 };
 
-export const Button = (props: ButtonCustomProps) => {
+export const Button = forwardRef<HTMLButtonElement, ButtonCustomProps>((props, ref) => {
    const { loading, ...otherProps } = props;
    return (
       <button
@@ -17,8 +17,9 @@ export const Button = (props: ButtonCustomProps) => {
             },
             otherProps.className,
          )}
+         ref={ref}
       >
          {props.children}
       </button>
    );
-};
+});

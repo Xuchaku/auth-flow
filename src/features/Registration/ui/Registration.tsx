@@ -5,14 +5,12 @@ import { RegisterExtendForm } from '../model/types';
 import { registerShema } from '../model/shema';
 import { Input } from '@shared/ui/Input';
 import { Button } from '@shared/ui/Button';
-import { userApi } from '@entities/User/model/api/userApi';
 import { useAppDispatch } from '@shared/hooks';
 import { setUserMainInfo } from '@entities/User/UserSlice';
 
 export const Registration = () => {
    const [triggerRegister, { isLoading: isLoadingRegister }] =
       registrationApi.useLazyRegisterQuery();
-   const [triggerLogin] = userApi.useLazyLoginQuery();
 
    const dispatch = useAppDispatch();
 

@@ -1,23 +1,12 @@
-import { cloneElement, HTMLAttributes, ReactElement, useState } from 'react';
+import { cloneElement, forwardRef, HTMLAttributes, ReactElement, useState } from 'react';
 import Modal from 'react-modal';
+import { customStyles } from './styles';
 
 type ModalWithButtonProps = HTMLAttributes<HTMLDivElement> & {
    trigger: ReactElement;
 };
 
-const customStyles = {
-   content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      border: 'none',
-   },
-};
-
-export const ModalWithButton = (props: ModalWithButtonProps) => {
+export const ModalWithButton = forwardRef<ReactModal, ModalWithButtonProps>((props, ref) => {
    const { trigger, ...otherProps } = props;
    const [isOpenModal, setIsOpenModal] = useState(false);
 
@@ -32,9 +21,14 @@ export const ModalWithButton = (props: ModalWithButtonProps) => {
    return (
       <>
          {cloneElement(trigger, { onClick: onShowModal })}
-         <Modal isOpen={isOpenModal} onRequestClose={handleCloseModal} style={customStyles}>
+         <Modal
+            isOpen={isOpenModal}
+            onRequestClose={handleCloseModal}
+            style={customStyles}
+            ref={ref}
+         >
             {props.children}
          </Modal>
       </>
    );
-};
+});

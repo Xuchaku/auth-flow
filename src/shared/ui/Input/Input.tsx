@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react';
+import { forwardRef, InputHTMLAttributes } from 'react';
 import classNames from 'classnames';
 
 type InputCustomProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -7,7 +7,7 @@ type InputCustomProps = InputHTMLAttributes<HTMLInputElement> & {
    label?: string;
 };
 
-export const Input = (props: InputCustomProps) => {
+export const Input = forwardRef<HTMLInputElement, InputCustomProps>((props, ref) => {
    const { error, helperText, label, ...otherProps } = props;
 
    return (
@@ -20,8 +20,9 @@ export const Input = (props: InputCustomProps) => {
                { 'border-1 border-red-500 focus:ring-red-500': error },
                props.className,
             )}
+            ref={ref}
          />
          {error && helperText && <p className='text-red-500 text-xs'>{helperText}</p>}
       </div>
    );
-};
+});

@@ -6,6 +6,7 @@ export const UserForm = () => {
    const isToken = useAppSelector(getIsToken);
    const { data } = userApi.useBasicInfoQuery(null, { skip: !isToken });
 
+   // TODO непонятно как выглядит ответ юзера... бек не отвечает
    return (
       <div>
          {data && (
